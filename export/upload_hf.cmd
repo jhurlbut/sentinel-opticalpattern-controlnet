@@ -3,7 +3,7 @@ rem Upload the prebuilt engine, demo recordings and model card to Hugging Face.
 rem Requires a one-time login first:  venv\Scripts\hf.exe auth login
 setlocal
 set HF=C:\Users\times\Sentinel\opticalpattern_build\venv\Scripts\hf.exe
-set REPO=jhurlbut/sentinel-opticalpattern-controlnet
+set REPO=Jamesbass/sentinel-opticalpattern-controlnet
 set ENG=C:\Users\times\Sentinel\engines\profiles\sdxl\custom\opticalpattern\896x512\unet_controlnet_union_ipadapter_fp16.engine
 set PRJ=C:\Users\times\Sentinel\workspace\projects\opticalpattern_controlnet
 %HF% repo create %REPO% --repo-type model 2>nul

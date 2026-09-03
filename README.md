@@ -43,7 +43,7 @@ measurements behind the tuning defaults, and a link to a prebuilt engine for RTX
 ## Quick start with the prebuilt engine (RTX 50-series)
 
 1. Download `unet_controlnet_union_ipadapter_fp16.engine` (8.4 GB) from the model repo on
-   Hugging Face: `jhurlbut/sentinel-opticalpattern-controlnet`.
+   Hugging Face: `Jamesbass/sentinel-opticalpattern-controlnet` (https://huggingface.co/Jamesbass/sentinel-opticalpattern-controlnet).
 2. Install it as a custom pack:
    ```
    python export/install_custom_pack.py --name opticalpattern --controlnet --engine <downloaded engine> --display "SDXL OpticalPattern CN 896x512"
