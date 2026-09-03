@@ -1,4 +1,4 @@
-"""Install a locally built StreamDiff engine as a Sentinel custom pack.
+r"""Install a locally built StreamDiff engine as a Sentinel custom pack.
 
 Copies the engine into engines/profiles/sdxl/custom/<name>/<WxH>/ under the loader's
 required filename and adds/updates the pack entry in engines/manifest_custom.json.
@@ -57,7 +57,7 @@ def main():
         print(f"engine already in place: {dst}")
 
     man = json.load(open(MANIFEST)) if os.path.exists(MANIFEST) else {"packs": {}, "schema_version": 2}
-    pack_id = f"custom-sdxl-{args.name}"
+    pack_id = f"custom-sdxl-{args.name}-{res}"
     entry = {
         "auto_download": False,
         "base_model": "stabilityai/sdxl-turbo",
