@@ -102,7 +102,9 @@ def fuse_lora(unet, lora_path, lora_scale):
     Text-encoder LoRA blocks are dropped: Sentinel's CLIP engines are fixed."""
     from diffusers.loaders import StableDiffusionXLLoraLoaderMixin
     raw = load_file(lora_path)
-    conv = StableDiffusionXLLoraLoaderMixin.lora_state_dict(raw)
+    # unet_config is required to map SGM-style kohya keys (input_blocks/output_blocks/middle_block)
+    # onto diffusers block names; without it those LoRAs fail with 'target modules not found'
+    conv = StableDiffusionXLLoraLoaderMixin.lora_state_dict(raw, unet_config=unet.config)
     if isinstance(conv, tuple):
         conv_sd, alphas = conv
     else:
