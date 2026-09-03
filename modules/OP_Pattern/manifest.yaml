@@ -1,0 +1,135 @@
+name: "OP Pattern"
+version: "1.0"
+x_description: "Control-image generator for the SDXL OpticalPattern ControlNet. Splits a source into three tones (darkest `coverage` to black, brightest `coverage` to white, the rest mid grey) using live percentile thresholds, or draws a procedural hidden pattern with the same coverage contract. Control output is clean; Monitor shows histogram, thresholds and measured coverage."
+mode: generator
+resolution: [896, 512]
+
+inputs:
+  - { name: "Source", slot: 0, required: false }
+
+parameters:
+  - name: pattern
+    display: "Pattern"
+    type: enum
+    default: 0
+    options: [Source Tones, Spiral, Rings, Stripes, Checker]
+    flags: button_grid
+    group: "Pattern"
+  - name: coverage
+    display: "Coverage"
+    type: float
+    min: 0.05
+    max: 0.45
+    default: 0.25
+    group: "Pattern"
+  - name: softness
+    display: "Edge Softness"
+    type: float
+    min: 0.0
+    max: 0.15
+    default: 0.02
+    group: "Pattern"
+  - name: invert
+    display: "Invert"
+    type: bool
+    default: false
+    group: "Pattern"
+  - name: smoothing
+    display: "Threshold Response"
+    type: float
+    min: 0.2
+    max: 12.0
+    default: 4.0
+    group: "Source Tones"
+  - name: scale
+    display: "Scale"
+    type: float
+    min: 0.25
+    max: 8.0
+    default: 2.0
+    group: "Geometry"
+  - name: arms
+    display: "Spiral Arms"
+    type: int
+    min: 1
+    max: 12
+    default: 3
+    group: "Geometry"
+  - name: twist
+    display: "Spiral Twist"
+    type: float
+    min: -4.0
+    max: 4.0
+    default: 1.5
+    group: "Geometry"
+  - name: angle
+    display: "Stripe Angle"
+    type: float
+    min: -180.0
+    max: 180.0
+    default: 20.0
+    group: "Geometry"
+  - name: spin
+    display: "Spin (cycles/s)"
+    type: float
+    min: -1.0
+    max: 1.0
+    default: 0.05
+    group: "Geometry"
+
+buffers:
+  - name: stat
+    structured: true
+    element_size: 4
+    element_count: 80
+
+passes:
+  - name: analyze
+    shader: analyze.hlsl
+    target: cs_5_0
+    dispatch: [1, 1, 1]
+    thread_group_x: 256
+    thread_group_y: 1
+    inputs:
+      - { slot: 0, source: input }
+    output: "buffer:stat"
+
+  - name: tones
+    shader: tones.hlsl
+    target: cs_5_0
+    inputs:
+      - { slot: 0, source: input }
+      - { slot: 1, source: "buffer:stat" }
+
+  - name: monitor
+    shader: monitor.hlsl
+    target: cs_5_0
+    inputs:
+      - { slot: 0, source: "pass:tones" }
+      - { slot: 1, source: "buffer:stat" }
+
+outputs:
+  - { name: "Control", pass: tones }
+  - { name: "Monitor", pass: monitor }
+
+control_outputs:
+  - name: low_threshold
+    buffer: stat
+    element: 64
+    field_offset: 0
+    description: "Luma below which the source reads as black (smoothed)"
+  - name: high_threshold
+    buffer: stat
+    element: 65
+    field_offset: 0
+    description: "Luma above which the source reads as white (smoothed)"
+  - name: dark_coverage
+    buffer: stat
+    element: 67
+    field_offset: 0
+    description: "Measured fraction of the frame currently black"
+  - name: light_coverage
+    buffer: stat
+    element: 68
+    field_offset: 0
+    description: "Measured fraction of the frame currently white"

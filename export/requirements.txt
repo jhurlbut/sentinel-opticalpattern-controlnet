@@ -1,0 +1,12 @@
+# Versions used for the 2026-09-03 build on Windows 11, Python 3.13, CUDA 12.8, RTX 5090 Laptop.
+# tensorrt must match the nvinfer_10.dll shipped with Sentinel (10.15.1 for 0.5.66).
+torch==2.11.0+cu128 --index-url https://download.pytorch.org/whl/cu128
+diffusers==0.40.0
+transformers==5.16.1
+peft==0.20.0
+accelerate==1.14.0
+safetensors==0.8.0
+onnx==1.22.0
+numpy==2.5.2
+tensorrt==10.15.1.29
+huggingface_hub>=1.29.0

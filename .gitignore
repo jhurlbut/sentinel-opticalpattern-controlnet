@@ -1,0 +1,14 @@
+# Sentinel runtime caches
+**/.sentinel/
+# recordings live on the model host, not in git
+captures/videos/
+captures/**/*.mp4
+# build artifacts (venv, weights, onnx, engines) live in opticalpattern_build/, outside this repo
+__pycache__/
+*.pyc
+*.engine
+*.onnx
+*.safetensors
+*.cache
+*.npy
+*.ref.pt
