@@ -15,6 +15,14 @@ drives it. Read this file before changing anything.
 | `export/` | ONNX export, TensorRT build, engine verification, pack installer, LoRA batch |
 | `docs/` | Proof images, tuning notes, correspondence draft |
 | `PLAN.md` | The phased plan that produced this repo |
+| `docs/PLAN-v2-quality.md` | Proposed plan for a sharper, higher-resolution engine (not executed) |
+| `docs/hf/README.md`, `export/upload_hf.cmd` | Model card and upload script for the Hugging Face repo |
+
+Prebuilt engine (RTX 50-series only), demo recordings and model card live on Hugging Face:
+https://huggingface.co/Jamesbass/sentinel-opticalpattern-controlnet
+The engine there is the exact file installed under `engines/profiles/sdxl/custom/opticalpattern/896x512/`
+(SHA-256 `cfba64d8450ff3cdefd70686b0a713c3f922d6c9ba6d25b58c2ce93e97ef5a3a`). Re-upload with
+`export/upload_hf.cmd` after a login with `hf auth login`; never put a token in a file or a command.
 
 Build artifacts (Python venv, downloaded weights, ONNX, engines, timing cache) are deliberately
 outside the repo. The scripts default to `C:\Users\<user>\Sentinel\opticalpattern_build\`;

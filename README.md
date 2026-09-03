@@ -14,6 +14,8 @@ and leaves the mid tones free, so any prompt can be bent around a hidden figure.
 contains everything needed to rebuild the engine on your own GPU, the graph that feeds it, the
 measurements behind the tuning defaults, and a link to a prebuilt engine for RTX 50-series cards.
 
+Prebuilt engine and demo recordings: **https://huggingface.co/Jamesbass/sentinel-opticalpattern-controlnet**
+
 ## Contents
 
 | Path | What |
@@ -159,7 +161,8 @@ it does nothing at denoise 1.0.
 ## Demo recordings
 
 Two short recordings (a cloud-face illusion from the node output, and the Sentinel window
-with a highway-interchange spiral) are hosted with the engine on Hugging Face under `demos/`.
+with a highway-interchange spiral) are hosted with the engine on Hugging Face under `demos/`:
+https://huggingface.co/Jamesbass/sentinel-opticalpattern-controlnet/tree/main/demos
 
 ## Proven and not verified
 
