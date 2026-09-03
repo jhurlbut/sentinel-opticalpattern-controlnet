@@ -1,0 +1,20 @@
+{
+  "base_path": "/sentinel/pipelines/OP_Pattern/parameters",
+  "count": 13,
+  "pipeline_id": "OP_Pattern",
+  "values": {
+    "/sentinel/pipelines/OP_Pattern/parameters/angle": "105.835999",
+    "/sentinel/pipelines/OP_Pattern/parameters/arms": "8",
+    "/sentinel/pipelines/OP_Pattern/parameters/coverage": "0.287",
+    "/sentinel/pipelines/OP_Pattern/parameters/invert": "false",
+    "/sentinel/pipelines/OP_Pattern/parameters/pattern": "3",
+    "/sentinel/pipelines/OP_Pattern/parameters/project_dir": "C:/Users/times/Sentinel/workspace/projects/opticalpattern_controlnet/modules/OP_Pattern",
+    "/sentinel/pipelines/OP_Pattern/parameters/resolution_height": "512",
+    "/sentinel/pipelines/OP_Pattern/parameters/resolution_width": "896",
+    "/sentinel/pipelines/OP_Pattern/parameters/scale": "1.857",
+    "/sentinel/pipelines/OP_Pattern/parameters/smoothing": "4.221",
+    "/sentinel/pipelines/OP_Pattern/parameters/softness": "0.118",
+    "/sentinel/pipelines/OP_Pattern/parameters/spin": "0.395",
+    "/sentinel/pipelines/OP_Pattern/parameters/twist": "-1.246"
+  }
+}
