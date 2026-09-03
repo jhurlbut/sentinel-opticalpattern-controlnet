@@ -2,7 +2,9 @@
 
 Got a third-party SDXL ControlNet running inside StreamDiff as a custom engine pack, and wrote it all up.
 
-**What it is:** the SDXL OpticalPattern ControlNet (Civitai 161132, the "hidden optical illusion" model) fused with SDXL-Turbo and the SDXL IP-Adapter into one TensorRT engine that the 0.5.66 StreamDiff node loads through `manifest_custom.json`. A small Module (`OP_Pattern`) makes the control image live: either a three-tone percentile split of the camera (darkest 25% / free / brightest 25%, which is what the ControlNet was trained on) or spiral / rings / stripes / checker generators. Runs 896x512 at ~30 fps with the window closed, ~15 with it open, on an RTX 5090 Laptop.
+Tested on Sentinel 0.5.66 (Windows 11, RTX 5090 Laptop, TensorRT 10.15.1.29, CUDA 12.8).
+
+**What it is:** the SDXL OpticalPattern ControlNet (Civitai 161132, the "hidden optical illusion" model) fused with SDXL-Turbo and the SDXL IP-Adapter into one TensorRT engine that the StreamDiff node loads through `manifest_custom.json`. A small Module (`OP_Pattern`) makes the control image live: either a three-tone percentile split of the camera (darkest 25% / free / brightest 25%, which is what the ControlNet was trained on) or spiral / rings / stripes / checker generators. Runs 896x512 at ~30 fps with the window closed, ~15 with it open, on an RTX 5090 Laptop.
 
 **How the engine was made, without an export script from you:** dumped the shipped engine's bindings, identified the base UNet as SDXL-Turbo by output correlation, wrapped UNet + ControlNet + IP-Adapter processors in a diffusers module with your exact input order and names, ONNX opset 17, TensorRT 10.15.1 FP16 static profile. Verified TRT vs PyTorch at corr 0.99993. Repo has the contract dump, the export and build scripts, an installer, the Sentinel project with presets, and the tuning measurements. Everything is repeatable; the prebuilt engine is on Hugging Face for 50-series cards.
 
