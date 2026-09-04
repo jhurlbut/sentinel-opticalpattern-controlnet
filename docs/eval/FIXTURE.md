@@ -147,3 +147,20 @@ GPU during diffusion: 82 to 87% busy, SM clock 1980 to 2025 MHz against a 3090 M
 quantization. Levers left: laptop power/performance mode and cooling, a smaller profile
 (768x448 or 704x384 RealVis engines, `export/run_realvis_small.cmd`), or accepting one step
 for the 30 fps rung and two steps for beauty.
+
+## Phase 4 continued: smaller RealVis profiles (2026-09-04, 09:30, node windows closed)
+
+| Profile | pixels vs 896x512 | UNet step | two-node chain | GPU clock / temp during test |
+|---|---|---|---|---|
+| RealVis 896x512 FP16 | 1.00 | 34 ms | 15 to 23 fps (23 right after a relaunch, cool GPU) | 2.0 GHz, 79 to 87 C |
+| RealVis 768x448 FP16 | 0.75 | 29 ms | 16 fps | 1.8 GHz, 85 C |
+| RealVis 704x384 FP16 | 0.59 | 27 ms | 17 fps | 1.8 GHz, 86 C |
+
+Halving the pixel count buys 20% on the step, because the step is dominated by fixed costs at
+this size and the clock keeps falling as the GPU heats. Both nodes serialise on the GPU, so
+the chain runs at 1 / (2 x step). 30 fps needs a 16 ms step; at the GPU's full 3.09 GHz the
+704x384 step would land at about 16 ms, so the two-step chain at 30 fps is a power/cooling
+question on this laptop, not an engine one. Both small profiles keep the illusion and the
+detail (captures in `docs/images/realvis_768x448_two_step.png`, `realvis_704x384_two_step.png`).
+Engine presets: `Engine: RealVis 704x384 Speed`, `Engine: RealVis 768x448`; canvas presets
+`Canvas 704x384`, `Canvas 768x448` on OP_Pattern.
