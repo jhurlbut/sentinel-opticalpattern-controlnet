@@ -76,6 +76,13 @@ parameters:
     max: 1.0
     default: 0.05
     group: "Geometry"
+  - name: init_strength
+    display: "Init Strength"
+    type: float
+    min: 0.0
+    max: 1.0
+    default: 0.25
+    group: "Init"
 
 buffers:
   - name: stat
@@ -108,9 +115,16 @@ passes:
       - { slot: 0, source: "pass:tones" }
       - { slot: 1, source: "buffer:stat" }
 
+  - name: init
+    shader: init.hlsl
+    target: cs_5_0
+    inputs:
+      - { slot: 0, source: "pass:tones" }
+
 outputs:
   - { name: "Control", pass: tones }
   - { name: "Monitor", pass: monitor }
+  - { name: "Init", pass: init }
 
 control_outputs:
   - name: low_threshold

@@ -7,14 +7,14 @@
     "canvasZoom": 1.5,
     "links": [
       {
-        "endPinId": 4,
-        "id": 9,
-        "startPinId": 11
-      },
-      {
         "endPinId": 10,
         "id": 1,
         "startPinId": 9
+      },
+      {
+        "endPinId": 4,
+        "id": 9,
+        "startPinId": 11
       },
       {
         "endPinId": 5,
@@ -23,13 +23,28 @@
       },
       {
         "endPinId": 3,
-        "id": 11,
+        "id": 12,
+        "startPinId": 13
+      },
+      {
+        "endPinId": 18,
+        "id": 13,
+        "startPinId": 7
+      },
+      {
+        "endPinId": 20,
+        "id": 14,
         "startPinId": 11
+      },
+      {
+        "endPinId": 24,
+        "id": 15,
+        "startPinId": 22
       }
     ],
-    "nextLinkId": 12,
-    "nextNodeId": 5,
-    "nextPinId": 17,
+    "nextLinkId": 16,
+    "nextNodeId": 7,
+    "nextPinId": 26,
     "nodes": [
       {
         "displayName": "OP_Diffusion",
@@ -57,6 +72,26 @@
         "id": 4,
         "posX": 322.6666564941406,
         "posY": 143.33334350585938,
+        "positionSet": true,
+        "previewVisible": true,
+        "type": 1
+      },
+      {
+        "displayName": "OP_Refine",
+        "entityId": "OP_Refine",
+        "id": 5,
+        "posX": 819.8024291992188,
+        "posY": 0.0,
+        "positionSet": true,
+        "previewVisible": true,
+        "type": 1
+      },
+      {
+        "displayName": "OP_Upscale",
+        "entityId": "OP_Upscale",
+        "id": 6,
+        "posX": 1039.802490234375,
+        "posY": 0.0,
         "positionSet": true,
         "previewVisible": true,
         "type": 1
@@ -146,15 +181,15 @@
       {
         "id": 13,
         "kind": 1,
-        "name": "low_threshold",
+        "name": "Init",
         "nodeId": 4,
         "slotIndex": 2,
-        "type": 7
+        "type": 0
       },
       {
         "id": 14,
         "kind": 1,
-        "name": "high_threshold",
+        "name": "low_threshold",
         "nodeId": 4,
         "slotIndex": 3,
         "type": 7
@@ -162,7 +197,7 @@
       {
         "id": 15,
         "kind": 1,
-        "name": "dark_coverage",
+        "name": "high_threshold",
         "nodeId": 4,
         "slotIndex": 4,
         "type": 7
@@ -170,17 +205,89 @@
       {
         "id": 16,
         "kind": 1,
-        "name": "light_coverage",
+        "name": "dark_coverage",
         "nodeId": 4,
         "slotIndex": 5,
         "type": 7
+      },
+      {
+        "id": 17,
+        "kind": 1,
+        "name": "light_coverage",
+        "nodeId": 4,
+        "slotIndex": 6,
+        "type": 7
+      },
+      {
+        "id": 18,
+        "kind": 0,
+        "name": "Video Input",
+        "nodeId": 5,
+        "slotIndex": 0,
+        "type": 0
+      },
+      {
+        "id": 19,
+        "kind": 0,
+        "name": "Style Reference",
+        "nodeId": 5,
+        "slotIndex": 1,
+        "type": 1
+      },
+      {
+        "id": 20,
+        "kind": 0,
+        "name": "Control Image",
+        "nodeId": 5,
+        "slotIndex": 2,
+        "type": 2
+      },
+      {
+        "id": 21,
+        "kind": 0,
+        "name": "Warp Map",
+        "nodeId": 5,
+        "slotIndex": 3,
+        "type": 4
+      },
+      {
+        "id": 22,
+        "kind": 1,
+        "name": "Color",
+        "nodeId": 5,
+        "slotIndex": 0,
+        "type": 0
+      },
+      {
+        "id": 23,
+        "kind": 1,
+        "name": "Depth",
+        "nodeId": 5,
+        "slotIndex": 1,
+        "type": 0
+      },
+      {
+        "id": 24,
+        "kind": 0,
+        "name": "Video",
+        "nodeId": 6,
+        "slotIndex": 0,
+        "type": 0
+      },
+      {
+        "id": 25,
+        "kind": 1,
+        "name": "Out",
+        "nodeId": 6,
+        "slotIndex": 0,
+        "type": 0
       }
     ]
   },
   "input": {
     "activeSource": ""
   },
-  "layout": "[Window][Terminal]\nPos=0,648\nSize=834,863\nCollapsed=0\nDockId=0x00000005,0\n\n[Window][Stats]\nPos=0,648\nSize=834,863\nCollapsed=0\nDockId=0x00000005,1\n\n[Window][Log]\nPos=0,648\nSize=834,863\nCollapsed=0\nDockId=0x00000005,2\n\n[Window][Properties]\nPos=1727,31\nSize=833,1480\nCollapsed=0\nDockId=0x00000002,0\n\n[Window][Graph]\nPos=836,648\nSize=889,863\nCollapsed=0\nDockId=0x00000006,0\n\n[Window][DockSpace]\nPos=0,31\nSize=2560,1480\nCollapsed=0\n\n[Window][Debug##Default]\nPos=60,60\nSize=400,400\nCollapsed=0\n\n[Window][module_0]\nPos=0,31\nSize=2088,1028\nCollapsed=0\nDockId=0x00000003,0\n\n[Window][OP_Diffusion]\nPos=0,31\nSize=1725,615\nCollapsed=0\nDockId=0x00000003,1\n\n[Window][OP_Pattern]\nPos=0,31\nSize=1725,615\nCollapsed=0\nDockId=0x00000003,0\n\n[Window][Project Engine Missing##missing_engine_modal]\nPos=1039,262\nSize=481,125\nCollapsed=0\n\n[Window][Recover Project]\nPos=560,360\nSize=880,404\nCollapsed=0\n\n[Window][Save Node Preset]\nPos=1070,473\nSize=420,565\nCollapsed=0\n\n[Docking][Data]\nDockSpace       ID=0xCCBD8CF7 Window=0x3DA2F1DE Pos=0,31 Size=2560,1480 Split=X\n  DockNode      ID=0x00000001 Parent=0xCCBD8CF7 SizeRef=1725,1125 Split=Y\n    DockNode    ID=0x00000003 Parent=0x00000001 SizeRef=1528,615 CentralNode=1 Selected=0x2146ABDB\n    DockNode    ID=0x00000004 Parent=0x00000001 SizeRef=1528,863 Split=X\n      DockNode  ID=0x00000005 Parent=0x00000004 SizeRef=834,450 Selected=0xD33228A6\n      DockNode  ID=0x00000006 Parent=0x00000004 SizeRef=889,450 Selected=0xF12F3499\n  DockNode      ID=0x00000002 Parent=0xCCBD8CF7 SizeRef=833,1125 Selected=0x8C72BEA8\n\n",
+  "layout": "[Window][Terminal]\nPos=0,262\nSize=563,863\nCollapsed=0\nDockId=0x00000005,0\n\n[Window][Stats]\nPos=0,262\nSize=563,863\nCollapsed=0\nDockId=0x00000005,1\n\n[Window][Log]\nPos=0,262\nSize=563,863\nCollapsed=0\nDockId=0x00000005,2\n\n[Window][Properties]\nPos=1167,31\nSize=833,1094\nCollapsed=0\nDockId=0x00000002,0\n\n[Window][Graph]\nPos=565,262\nSize=600,863\nCollapsed=0\nDockId=0x00000006,0\n\n[Window][DockSpace]\nPos=0,31\nSize=2000,1094\nCollapsed=0\n\n[Window][Debug##Default]\nPos=60,60\nSize=400,400\nCollapsed=0\n\n[Window][module_0]\nPos=0,31\nSize=2088,1028\nCollapsed=0\nDockId=0x00000003,0\n\n[Window][OP_Diffusion]\nPos=0,31\nSize=1165,229\nCollapsed=0\nDockId=0x00000003,1\n\n[Window][OP_Pattern]\nPos=0,31\nSize=1165,229\nCollapsed=0\nDockId=0x00000003,0\n\n[Window][Project Engine Missing##missing_engine_modal]\nPos=1039,262\nSize=481,125\nCollapsed=0\n\n[Window][Recover Project]\nPos=560,360\nSize=880,404\nCollapsed=0\n\n[Window][Save Node Preset]\nPos=1070,473\nSize=420,565\nCollapsed=0\n\n[Window][OP_Refine]\nPos=0,31\nSize=1165,229\nCollapsed=0\nDockId=0x00000003,2\n\n[Window][OP_Upscale]\nPos=0,31\nSize=1165,229\nCollapsed=0\nDockId=0x00000003,3\n\n[Docking][Data]\nDockSpace       ID=0xCCBD8CF7 Window=0x3DA2F1DE Pos=0,31 Size=2000,1094 Split=X\n  DockNode      ID=0x00000001 Parent=0xCCBD8CF7 SizeRef=1725,1125 Split=Y\n    DockNode    ID=0x00000003 Parent=0x00000001 SizeRef=1528,615 CentralNode=1 Selected=0xDB3ECD28\n    DockNode    ID=0x00000004 Parent=0x00000001 SizeRef=1528,863 Split=X\n      DockNode  ID=0x00000005 Parent=0x00000004 SizeRef=834,450 Selected=0xD33228A6\n      DockNode  ID=0x00000006 Parent=0x00000004 SizeRef=889,450 Selected=0xF12F3499\n  DockNode      ID=0x00000002 Parent=0xCCBD8CF7 SizeRef=833,1125 Selected=0x8C72BEA8\n\n",
   "name": "opticalpattern_controlnet",
   "nodePresets": [
     {
@@ -316,6 +423,76 @@
       ],
       "pipelineType": "streamdiff",
       "scope": "project"
+    },
+    {
+      "created": "2026-09-03T17:08:46",
+      "id": "444c33a7-0aff-ad6a-cf57efc33d0b",
+      "modified": "2026-09-03T17:08:46",
+      "name": "Refine Full (dn0.7 cn1.0)",
+      "parameters": [
+        {
+          "name": "denoise",
+          "value": "0.7"
+        },
+        {
+          "name": "controlnet_scale",
+          "value": "1.000000"
+        },
+        {
+          "name": "feedback",
+          "value": "0.000000"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
+    },
+    {
+      "created": "2026-09-03T17:08:48",
+      "id": "94b89b51-3048-ddd4-30341a9ce70a",
+      "modified": "2026-09-03T17:08:48",
+      "name": "Stage 1 for Refine (dn1 cn0.8 fb0)",
+      "parameters": [
+        {
+          "name": "denoise",
+          "value": "1.000000"
+        },
+        {
+          "name": "controlnet_scale",
+          "value": "0.8"
+        },
+        {
+          "name": "feedback",
+          "value": "0.000000"
+        },
+        {
+          "name": "sharpen",
+          "value": "0.000000"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
+    },
+    {
+      "created": "2026-09-03T17:09:11",
+      "id": "0543b7ed-e0a8-b596-218be07f473b",
+      "modified": "2026-09-03T17:09:11",
+      "name": "Refine Light (dn0.5 cn1.0)",
+      "parameters": [
+        {
+          "name": "denoise",
+          "value": "0.5"
+        },
+        {
+          "name": "controlnet_scale",
+          "value": "1.000000"
+        },
+        {
+          "name": "feedback",
+          "value": "0.000000"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
     }
   ],
   "osc": {
@@ -329,6 +506,127 @@
   "outputObjects": [],
   "outputs": [],
   "pipelines": [
+    {
+      "displayName": "OP_Refine",
+      "enabled": true,
+      "expressions": null,
+      "fitMode": 1,
+      "id": "OP_Refine",
+      "inputSlotSourceIds": [
+        "OP_Diffusion",
+        "",
+        "OP_Pattern",
+        ""
+      ],
+      "outputFitMode": 1,
+      "outputSinkId": "",
+      "panelAnchorId": "OP_Refine",
+      "panelOpen": true,
+      "parameters": {
+        "autopilot_deadzone": "0.040000",
+        "autopilot_enabled": "false",
+        "autopilot_invert_x": "false",
+        "autopilot_invert_y": "false",
+        "autopilot_sensitivity": "2.000000",
+        "autopilot_smoothing": "0.900000",
+        "autopilot_strength": "0.100000",
+        "black_level": "0.000000",
+        "brightness": "0.000000",
+        "cadence_fade_curve": "0",
+        "cadence_fade_frames": "0",
+        "color_match_algorithm": "2",
+        "color_match_ema_alpha": "0.100000",
+        "color_match_enabled": "false",
+        "color_match_strength": "0.850000",
+        "color_match_style_blend": "0.500000",
+        "color_match_target": "2",
+        "contrast": "1.000000",
+        "controlnet_auto_depth": "false",
+        "controlnet_enabled": "true",
+        "controlnet_scale": "1.000000",
+        "controlnet_type": "1",
+        "denoise": "0.700000",
+        "depth_adaptive_smoothing": "true",
+        "depth_cadence": "1",
+        "depth_fllf_strength": "0.500000",
+        "depth_fllf_threshold": "0.050000",
+        "depth_frame_delay": "0",
+        "depth_model_family": "dav2",
+        "depth_model_resolution": "518",
+        "depth_model_size": "small",
+        "depth_motion_threshold": "0.050000",
+        "depth_parallax": "false",
+        "depth_quantize_bits": "8",
+        "depth_range_smoothing": "0.900000",
+        "depth_smoothing": "0.600000",
+        "dilate": "0.000000",
+        "engine_precision": "1",
+        "engine_profile": "sdxl/custom/opticalpattern/896x512",
+        "engine_profile_type": "fixed",
+        "engine_resolution": "2",
+        "engine_tier": "1",
+        "erode": "0.000000",
+        "feedback": "0.000000",
+        "frame_skip": "1",
+        "frame_skip_blend": "1.000000",
+        "frame_skip_steady": "false",
+        "gamma": "1.000000",
+        "hold": "false",
+        "image_noise_blend": "0",
+        "image_noise_scale": "1.000000",
+        "image_noise_strength": "0.000000",
+        "image_noise_type": "0",
+        "ipadapter_enable": "false",
+        "ipadapter_scale": "1.000000",
+        "ipadapter_update_interval": "30",
+        "pan_x": "0.000000",
+        "pan_y": "0.000000",
+        "parallax_focus": "0.420000",
+        "parallax_height": "0.040000",
+        "parallax_invert_depth": "false",
+        "parallax_isometric": "0.000000",
+        "parallax_multiplier_x": "9.000000",
+        "parallax_multiplier_y": "9.000000",
+        "parallax_offset_x": "0.000000",
+        "parallax_offset_y": "0.000000",
+        "parallax_quality": "0.800000",
+        "parallax_steady": "1.000000",
+        "processing_height": "512",
+        "processing_width": "896",
+        "profile_has_controlnet": "true",
+        "profile_has_ipadapter": "true",
+        "profile_has_union": "true",
+        "prompt": "dense autumn forest, winding dirt path, golden afternoon light, oil painting, highly detailed",
+        "prompt_bank_enabled": "false",
+        "prompt_position": "0.000000",
+        "prompt_weight": "1.000000",
+        "render_count": "1",
+        "render_one": "0",
+        "rotation": "0.000000",
+        "saturation": "1.000000",
+        "seed": "42",
+        "seed_locked": "true",
+        "seed_travel_enabled": "false",
+        "seed_travel_interpolation": "1",
+        "seed_travel_speed": "1.000000",
+        "seed_variation": "0.100000",
+        "sharpen": "0.100000",
+        "sharpen_radius": "1.000000",
+        "steps": "1",
+        "vsr_downsample_enabled": "false",
+        "vsr_downsample_filter": "1",
+        "vsr_downsample_scale": "100.000000",
+        "vsr_enabled": "true",
+        "vsr_quality": "3",
+        "warp_edge_mode": "1",
+        "warp_enabled": "false",
+        "warp_scale": "0.100000",
+        "zoom": "0.000000"
+      },
+      "running": true,
+      "secondaryInputFilePaths": null,
+      "type": "streamdiff"
+    },
     {
       "displayName": "OP_Diffusion",
       "enabled": true,
@@ -366,9 +664,9 @@
         "contrast": "1.232000",
         "controlnet_auto_depth": "false",
         "controlnet_enabled": "true",
-        "controlnet_scale": "0.646000",
+        "controlnet_scale": "0.800000",
         "controlnet_type": "1",
-        "denoise": "0.879000",
+        "denoise": "1.000000",
         "depth_adaptive_smoothing": "true",
         "depth_cadence": "1",
         "depth_fllf_strength": "0.500000",
@@ -386,10 +684,10 @@
         "engine_precision": "1",
         "engine_profile": "sdxl/custom/opticalpattern/896x512",
         "engine_profile_type": "fixed",
-        "engine_resolution": "1",
+        "engine_resolution": "2",
         "engine_tier": "1",
         "erode": "0.000000",
-        "feedback": "0.414000",
+        "feedback": "0.000000",
         "frame_skip": "1",
         "frame_skip_blend": "1.000000",
         "frame_skip_steady": "true",
@@ -397,9 +695,9 @@
         "hold": "false",
         "image_noise_blend": "2",
         "image_noise_scale": "5.169000",
-        "image_noise_strength": "0.566000",
+        "image_noise_strength": "0.000000",
         "image_noise_type": "0",
-        "ipadapter_enable": "true",
+        "ipadapter_enable": "false",
         "ipadapter_scale": "0.192000",
         "ipadapter_update_interval": "22",
         "pan_x": "0.011000",
@@ -419,7 +717,7 @@
         "profile_has_controlnet": "true",
         "profile_has_ipadapter": "true",
         "profile_has_union": "true",
-        "prompt": "overhead city streets, rush hour, highways, highly detailed, 4k, render",
+        "prompt": "dense autumn forest, winding dirt path, golden afternoon light, oil painting, highly detailed",
         "prompt_bank_enabled": "false",
         "prompt_position": "0.000000",
         "prompt_weight": "1.000000",
@@ -444,7 +742,7 @@
         "warp_edge_mode": "1",
         "warp_enabled": "false",
         "warp_scale": "0.266000",
-        "zoom": "-0.648000"
+        "zoom": "0.000000"
       },
       "running": true,
       "secondaryInputFilePaths": null,
@@ -467,6 +765,7 @@
         "angle": "32.811001",
         "arms": "5.000000",
         "coverage": "0.287000",
+        "init_strength": "0.250000",
         "invert": "0.000000",
         "pattern": "1.000000",
         "project_dir": "modules/OP_Pattern",
@@ -481,9 +780,30 @@
       "running": true,
       "secondaryInputFilePaths": null,
       "type": "module"
+    },
+    {
+      "displayName": "OP_Upscale",
+      "enabled": true,
+      "expressions": null,
+      "fitMode": 1,
+      "id": "OP_Upscale",
+      "inputSlotSourceIds": [
+        "OP_Refine"
+      ],
+      "outputFitMode": 1,
+      "outputSinkId": "",
+      "panelAnchorId": "OP_Upscale",
+      "panelOpen": true,
+      "parameters": {
+        "quality": "3",
+        "scale_factor": "0"
+      },
+      "running": true,
+      "secondaryInputFilePaths": null,
+      "type": "vsr"
     }
   ],
-  "saved_at_ms": 1788476662608,
+  "saved_at_ms": 1788480614531,
   "sources": [
     {
       "captureFrameRate": 0,

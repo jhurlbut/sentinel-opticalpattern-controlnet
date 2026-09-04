@@ -158,6 +158,29 @@ IP-Adapter works with this engine (a Style Reference at scale 1.0 reconstructs t
 subject inside the scene). Depth parallax also works, but only through the feedback path, so
 it does nothing at denoise 1.0.
 
+## Two-step refine (Plan v2, Phase 1)
+
+A second StreamDiff node on the same profile turns the one-step result into a two-step one:
+
+```
+OP_Pattern.Init    -> OP_Diffusion.Video Input   (denoise 1.0, cn 0.8)
+OP_Pattern.Control -> OP_Diffusion.Control Image
+OP_Diffusion.Color -> OP_Refine.Video Input      (denoise 0.7, cn 1.0)
+OP_Pattern.Control -> OP_Refine.Control Image
+OP_Refine.Color    -> OP_Upscale (vsr, 2x, High)
+```
+
+The refine node re-denoises the first result against the same control image. At ControlNet
+1.0 it keeps the figure and adds the detail a single Turbo step cannot; at 0.7 the figure
+fades into a plain scene, at 1.3 the pattern takes over. The engine pool shares one engine
+between the two nodes (16 GB total), and the chain runs at about 13 fps at 896x512. Presets
+`Refine Light` / `Refine Full` on the refine node and `Stage 1 for Refine` on the first
+node hold the tuned values. `OP_Pattern` gained an `Init` output (control image pulled
+toward mid grey by `init_strength`) because the full-contrast pattern as init takes over
+at any denoise below 1.0. Measurements: `docs/eval/FIXTURE.md`.
+
+![Two-node refine](docs/images/two_node_refine_cn_sweep.png)
+
 ## Demo recordings
 
 Two short recordings (a cloud-face illusion from the node output, and the Sentinel window
