@@ -122,11 +122,15 @@ def fuse_lora(unet, lora_path, lora_scale):
           f"unet_tensors={n_unet} dropped_text_encoder_tensors={n_te}", flush=True)
 
 
-def build_models(device, dtype, lora=None, lora_scale=1.0, with_controlnet=True):
+def build_models(device, dtype, lora=None, lora_scale=1.0, with_controlnet=True,
+                 base_unet=TURBO_UNET, variant="fp16"):
     from diffusers import ControlNetModel, UNet2DConditionModel
     t0 = time.time()
-    unet = UNet2DConditionModel.from_pretrained(TURBO_UNET, torch_dtype=dtype, variant="fp16",
-                                                use_safetensors=True)
+    kw = {"torch_dtype": dtype, "use_safetensors": True}
+    if variant:
+        kw["variant"] = variant
+    unet = UNet2DConditionModel.from_pretrained(base_unet, **kw)
+    print(f"base UNet: {base_unet} (variant={variant})", flush=True)
     if lora:
         fuse_lora(unet, lora, lora_scale)
 
@@ -182,6 +186,9 @@ def main():
     ap.add_argument("--lora-scale", type=float, default=1.0)
     ap.add_argument("--no-controlnet", action="store_true",
                     help="export a plain IP-Adapter UNet (unet_ipadapter_fp16 profile)")
+    ap.add_argument("--base-unet", default=TURBO_UNET,
+                    help="diffusers UNet folder to use as the base (default: SDXL-Turbo)")
+    ap.add_argument("--variant", default="fp16", help="weights variant, '' for none")
     args = ap.parse_args()
     with_cn = not args.no_controlnet
     names = input_names(with_cn)
@@ -191,7 +198,8 @@ def main():
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
 
     model = build_models(device, dtype, lora=args.lora, lora_scale=args.lora_scale,
-                         with_controlnet=with_cn)
+                         with_controlnet=with_cn, base_unet=args.base_unet,
+                         variant=args.variant or None)
     inputs = make_inputs(args.width, args.height, device, dtype, with_cn)
 
     with torch.no_grad():
