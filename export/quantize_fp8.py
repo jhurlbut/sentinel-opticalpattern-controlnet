@@ -26,13 +26,43 @@ def main():
     ap.add_argument("--keep-controlnet-fp16", action="store_true",
                     help="exclude nodes whose name contains 'controlnet' from quantization")
     ap.add_argument("--eps", default="cuda:0,cpu", help="calibration execution providers, comma separated")
+    ap.add_argument("--calibration-method", default="max",
+                    help="max (default, robust for fp8) | entropy | percentile | distribution")
     args = ap.parse_args()
 
     from modelopt.onnx.quantization import quantize
+    from onnxruntime.quantization.calibrate import CalibrationDataReader
 
     calib = dict(np.load(args.calib))
     n = next(iter(calib.values())).shape[0]
     print(f"calibration set: {n} samples, inputs: {list(calib)}", flush=True)
+
+    # Sentinel's contract has batch-less inputs (timestep [1], controlnet_scale [1],
+    # ipadapter_scale [70]); ModelOpt's default provider splits every array on axis 0 and would
+    # hand the model a [1,70]. Feed exact per-sample shapes ourselves instead.
+    NO_BATCH = {"ipadapter_scale"}
+
+    class SentinelReader(CalibrationDataReader):
+        def __init__(self, data):
+            self.samples = []
+            for i in range(n):
+                feed = {}
+                for k, v in data.items():
+                    feed[k] = v[i] if k in NO_BATCH else v[i:i + 1]
+                self.samples.append(feed)
+            self.rewind()
+
+        def get_next(self):
+            return next(self.it, None)
+
+        def get_first(self):
+            return self.samples[0]
+
+        def rewind(self):
+            self.it = iter(self.samples)
+
+    reader = SentinelReader(calib)
+    print("per-sample shapes:", {k: tuple(v.shape) for k, v in reader.get_first().items()}, flush=True)
 
     nodes_to_exclude = None
     if args.keep_controlnet_fp16:
@@ -46,7 +76,8 @@ def main():
     quantize(
         onnx_path=args.onnx,
         quantize_mode=args.mode,
-        calibration_data=calib,
+        calibration_data_reader=reader,
+        calibration_method=args.calibration_method,
         calibration_eps=args.eps.split(","),
         nodes_to_exclude=nodes_to_exclude,
         use_external_data_format=True,

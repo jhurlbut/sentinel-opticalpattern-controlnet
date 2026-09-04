@@ -112,3 +112,38 @@ chain needs two 8.4 GB engines resident, which is 24 GB on this card and hangs t
 Chosen: `RealVis Stage 1 (dn1 cn0.3 fb0)` and `RealVis Refine (dn0.65 cn0.85)`. Project variant:
 `opticalpattern_realvis_two_pass.sentinel`. Stage one alone is not usable with this base; the
 quality is entirely in the second step, which is what a distilled 4-step model is built for.
+
+## Phase 4: speed (2026-09-04, 01:20 to 01:40)
+
+FP8 (ModelOpt ONNX PTQ, max calibration, 32 samples, `export/run_fp8.cmd`) on the RealVis engine:
+
+| | FP16 | FP8 |
+|---|---|---|
+| engine size | 8.4 GB | 4.2 GB |
+| verify-harness step | 78.5 ms | 55.3 ms (1.42x) |
+| in-app UNet step, 896x512 | 34 ms | 29 to 31 ms (1.13x) |
+| TRT vs PyTorch corr (harness) | 0.99989 | 0.937 |
+| fixture image | correct | noise; figure and scene both destroyed |
+
+The verify harness feeds random IP-Adapter tokens through a branch that calibrated on zeros
+(29 zero scales had to be patched to build at all), so its correlation is pessimistic, but the
+in-app fixture is unambiguous: this quantization is unusable and the speed gain is small.
+Not pursued further; a proper attempt would need per-op exclusions (attention, ControlNet),
+real IP-Adapter tokens in the calibration set, and percentile calibration, at about an hour
+per attempt for a ceiling of maybe 15 to 20%.
+
+What actually limits frame rate on this machine (node windows closed):
+
+| Configuration | node frame time | fps |
+|---|---|---|
+| app loop, diffusion held on both nodes | - | OP_Pattern 61 |
+| one StreamDiff node, FP8 RealVis 896x512 | 43 ms (UNet 29) | 23 |
+| two-node chain, FP8 RealVis 896x512 | 61 to 68 ms (UNet 30 each) | 16 |
+| two-node chain, FP16 RealVis 896x512 | 64 to 67 ms (UNet 34 each) | 15 |
+
+GPU during diffusion: 82 to 87% busy, SM clock 1980 to 2025 MHz against a 3090 MHz maximum,
+145 to 148 W, 79 to 87 C, throttle reason `sw_power_cap` active (default limit 95 W, maximum
+175 W). The GPU is running at about two thirds of its clock; that is worth more than any
+quantization. Levers left: laptop power/performance mode and cooling, a smaller profile
+(768x448 or 704x384 RealVis engines, `export/run_realvis_small.cmd`), or accepting one step
+for the 30 fps rung and two steps for beauty.
