@@ -13,6 +13,8 @@ using a built engine is bound by all of them:
 | IP-Adapter SDXL | h94/IP-Adapter | Apache-2.0 |
 | ControlNet config | diffusers/controlnet-canny-sdxl-1.0 | OpenRAIL++ |
 | LoRAs used by `run_lora_engines.cmd` | Civitai, per model page | Per model page |
+| RealVisXL V5.0 UNet (realvis pack) | SG161222/RealVisXL_V5.0 | CreativeML Open RAIL++-M |
+| DMD2 SDXL 4-step LoRA (realvis pack) | tianweiy/DMD2 | Apache-2.0, research-use note on the SDXL weights |
 
 The prebuilt engine published alongside this repo is therefore for non-commercial research
 use only, and only runs on the GPU architecture it was built for. Commercial use requires a

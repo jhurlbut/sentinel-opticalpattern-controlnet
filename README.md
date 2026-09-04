@@ -219,6 +219,19 @@ the format the models ship in; precision is not the limit. Numbers and the switc
 ![Quality ladder](docs/images/quality_ladder_896_vs_1024.png)
 ![Three steps](docs/images/three_step_cn_sweep.png)
 
+## RealVisXL V5 + DMD2 base (Plan v2, Phase 3)
+
+`export_fused_unet.py --base-unet <RealVisXL V5 unet> --variant fp16 --lora <DMD2 4-step LoRA>`
+builds a second ControlNet engine on the photoreal base the Civitai author used. On its own,
+one step of it is grainy and the ControlNet overwhelms it, but as a two-node chain it is the
+best result in this repo: stage one at ControlNet 0.3, refine at ControlNet 0.85 and denoise
+0.65, about 8x the Turbo chain's sharpness at the same 34 ms step time. Both nodes must run
+the RealVis engine; mixing it with the Turbo engine needs 24 GB of VRAM and hangs the device.
+Project variant: `opticalpattern_realvis_two_pass.sentinel`, presets `RealVis Stage 1`,
+`RealVis Refine`, and `Engine: RealVisXL+DMD2 CN 896x512`. Numbers: `docs/eval/FIXTURE.md`.
+
+![RealVis two-step](docs/images/realvis_two_step_tune.png)
+
 ## Demo recordings
 
 Two short recordings (a cloud-face illusion from the node output, and the Sentinel window

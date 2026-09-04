@@ -92,3 +92,23 @@ Project default is the Live rung. `Engine: OpticalPattern CN 1024x768 Beauty` on
 diffusion nodes plus `Canvas 1024x768` on OP_Pattern switch to Beauty (relaunch each node,
 first node first). OP_Refine2 ships with `hold` on; clear it and recall `Refine2 Hero` for
 the third step.
+
+## Phase 3: RealVisXL V5 + DMD2 4-step LoRA base (2026-09-03, 23:20)
+
+Engine `custom-sdxl-realvis-896x512`: RealVisXL V5.0 UNet with the DMD2 4-step LoRA fused at
+1.0, OpticalPattern ControlNet, IP-Adapter, FP16, 896x512. TRT vs PyTorch corr 0.99989. In-app
+UNet step 34 ms, same as Turbo. Both chain nodes must run this engine: a mixed Turbo/RealVis
+chain needs two 8.4 GB engines resident, which is 24 GB on this card and hangs the device.
+
+| Configuration (forest fixture, 896 analysis width) | lapvar x1e4 | hf_ratio | vs Turbo 2-step (3.20 / 0.016) | Figure |
+|---|---|---|---|---|
+| stage 1 only, cn 0.8 / 1.0, denoise 1.0 | 22.9 / 23.3 | 0.043 | 7x / 2.7x | pattern only, grainy; ControlNet overwhelms this UNet |
+| stage 1 only, cn 0.15 / 0.3 / 0.5 | - | - | - | scene appears; grainy one-step image (DMD2 is a 4-step model) |
+| stage 1 cn 0.3 + refine cn 0.5 dn 0.6 / 0.75 | 51.0 / 79.4 | 0.079 / 0.081 | 16x / 25x | photoreal detail, spiral subtle |
+| stage 1 cn 0.3 + refine cn 1.0 dn 0.6 | 18.9 | 0.074 | 5.9x / 4.6x | illusion, detailed |
+| stage 1 cn 0.3 + refine cn 1.0 dn 0.75 | 41.5 | 0.085 | 13x / 5.3x | pattern dominant |
+| stage 1 cn 0.3 + refine cn 0.7 / 0.85 at dn 0.55 / 0.65 | 22.9 to 34.2 | 0.067 to 0.070 | 7x to 11x / 4.2x to 4.4x | all four: clear spiral, rich foliage and trunk detail |
+
+Chosen: `RealVis Stage 1 (dn1 cn0.3 fb0)` and `RealVis Refine (dn0.65 cn0.85)`. Project variant:
+`opticalpattern_realvis_two_pass.sentinel`. Stage one alone is not usable with this base; the
+quality is entirely in the second step, which is what a distilled 4-step model is built for.
