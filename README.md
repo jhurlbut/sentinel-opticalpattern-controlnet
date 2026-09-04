@@ -232,6 +232,22 @@ Project variant: `opticalpattern_realvis_two_pass.sentinel`, presets `RealVis St
 
 ![RealVis two-step](docs/images/realvis_two_step_tune.png)
 
+## Speed (Plan v2, Phase 4)
+
+FP8 quantization was tried and rejected: 13% faster in the app and the images are noise
+(`docs/eval/FIXTURE.md`). What limits frame rate on the RTX 5090 Laptop is the GPU's power
+cap: during diffusion it runs at 1.8 to 2.0 GHz of a 3.09 GHz maximum, and the two chain
+nodes serialise on it, so the chain runs at 1 / (2 x step). Measured with node windows closed:
+
+| Rung | Step | Two-node chain |
+|---|---|---|
+| RealVis 896x512 | 34 ms | 15 to 23 fps |
+| RealVis 768x448 (`opticalpattern_realvis_two_pass_768_speed.sentinel`) | 29 ms | 16 to 17 fps |
+| RealVis 704x384 | 27 ms | 17 fps, refine loses structure |
+
+At the GPU's full clock the 704x384 step would be about 16 ms, which is the 30 fps line for
+two steps. Keep node preview windows closed while performing; they cost 5 to 8 fps.
+
 ## Demo recordings
 
 Two short recordings (a cloud-face illusion from the node output, and the Sentinel window
