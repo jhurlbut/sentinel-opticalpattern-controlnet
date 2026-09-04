@@ -1,6 +1,9 @@
 # Plan v2: a higher-detail OpticalPattern engine for Sentinel
 
-Status: proposed 2026-09-03. Nothing below has been executed.
+Status: in progress 2026-09-03. Phase 0 and Phase 1 done (see `docs/eval/FIXTURE.md`).
+Phase 2 finding: the StreamDiff node caps `processing_width` and `processing_height` at 1024,
+so the 1280x768 engine built and verified but cannot be loaded (`Failed to reload engines ...
+at 1024x768`). Replacement profiles: 1024x768 (0.79 MP) and 1024x576 (0.59 MP, 16:9).
 
 ## Where the detail is lost today
 
