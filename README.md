@@ -109,8 +109,27 @@ PyTorch output. The shipped build measured correlation 0.99993 and a 34 ms UNet 
 
 `export_fused_unet.py --no-controlnet --lora <file> --lora-scale <s>` fuses a kohya or
 diffusers SDXL LoRA into the UNet before export. Text-encoder LoRA blocks are dropped because
-Sentinel's CLIP engines are fixed, so trigger words matter more than usual.
-`export/run_lora_engines.cmd` exports and builds one engine per LoRA in sequence.
+Sentinel's CLIP engines are fixed, so trigger words matter more than usual. Kohya LoRAs that
+use SGM block names (`input_blocks`, `output_blocks`, `middle_block`) need the UNet config
+passed to the converter; the script does this. `export/run_lora_engines.cmd` exports and
+builds one engine per LoRA in sequence.
+
+Three IP-Adapter-only LoRA engines (5.9 GB each, `engine_tier` = SDXL IP-Adapter) were
+built, installed as packs and proven live on 2026-09-03. The fused LoRA is always active; the
+trigger words decide how hard it shows:
+
+| Pack | LoRA | Trigger | Result |
+|---|---|---|---|
+| `custom-sdxl-glitch-896x512` | Aether Glitch v1 | `vhs glitch` | heavy analog distortion with the trigger, clean neon photograph without |
+| `custom-sdxl-infrared-896x512` | Zavy's Infrared SDXL | `zavy-nffrd, infrared` | white foliage and dark sky with the trigger, ordinary park without |
+| `custom-sdxl-xray-896x512` | DD X-ray v1 | `xray` | radiograph with the trigger, studio photo without |
+
+![Glitch](docs/images/lora_glitch.png)
+![Infrared](docs/images/lora_infrared.png)
+![X-ray](docs/images/lora_xray.png)
+
+Project presets named `Engine: ...` switch the first node between the OpticalPattern
+ControlNet engine and the three LoRA engines; invoke Relaunch after recalling one.
 
 ## The control image contract
 
