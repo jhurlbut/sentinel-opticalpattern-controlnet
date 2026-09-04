@@ -63,3 +63,32 @@ timestep-750 regime the offline probe showed; a neutral init just greys the fram
 Offline one-step probes (`export/probe_candidate.py`, pure noise, cn 0.8):
 SDXL-Turbo t=999 reproduces the in-app look; t=749 is sharper for both Turbo and
 RealVisXL V5 + DMD2 4-step LoRA, but only reachable with a second node.
+
+## Quality ladder (2026-09-03, RTX 5090 Laptop, all node windows open)
+
+Same fixture. Metrics at analysis width 1024 for the 1024 rows, 896 for the 896 rows;
+ratios are against the two-step 1024 result except where noted.
+
+| Rung | Chain | lapvar x1e4 | hf_ratio | Chain frame time | Figure |
+|---|---|---|---|---|---|
+| Live | 896x512, 2 steps (dn1.0 cn0.8 -> dn0.7 cn1.0) | 3.20 | 0.016 | about 150 ms (13 fps) | clear |
+| Beauty | 1024x768, 2 steps (same values) | 4.06 | 0.016 | about 205 ms (10 fps) | clear, real trunk detail |
+| Hero | 1024x768, 3 steps (+ dn0.45 cn1.6) | 11.29 (cn1.0 measurement) | 0.110 | about 320 ms (3 fps) | clear at cn 1.6; fades at cn 1.0 |
+
+Third-node ControlNet: 1.0 dissolves the spiral into curved trees, 1.3 keeps a partial figure,
+1.6 keeps it fully while retaining the three-step detail. Third-node denoise 0.3 / 0.45 / 0.6
+at cn 1.0: lapvar 7.2 / 11.3 / 13.8, hf 0.075 / 0.110 / 0.109 versus 4.06 / 0.016 for two steps.
+
+VRAM: 17.8 GB for three nodes sharing one 1024x768 engine (`refs=3`). A freshly created
+StreamDiff node first tries to load the stock 896x512 engine; with two custom-engine nodes
+already resident that load fails on VRAM, the node's engine parameters reset to defaults, and
+they must be set again before the relaunch onto the shared custom engine.
+
+Precision: all engines are FP16, the format the models ship in; TRT-vs-PyTorch correlation
+is 0.99998 to 0.99999, so quantisation is not where the softness comes from. FP8 would trade
+quality for speed, not the reverse.
+
+Project default is the Live rung. `Engine: OpticalPattern CN 1024x768 Beauty` on the
+diffusion nodes plus `Canvas 1024x768` on OP_Pattern switch to Beauty (relaunch each node,
+first node first). OP_Refine2 ships with `hold` on; clear it and recall `Refine2 Hero` for
+the third step.

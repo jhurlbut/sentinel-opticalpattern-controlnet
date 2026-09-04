@@ -200,6 +200,25 @@ at any denoise below 1.0. Measurements: `docs/eval/FIXTURE.md`.
 
 ![Two-node refine](docs/images/two_node_refine_cn_sweep.png)
 
+## Quality ladder (Plan v2, Phases 1 and 2)
+
+| Rung | What | Cost on the RTX 5090 Laptop |
+|---|---|---|
+| Live (project default) | 896x512, two steps | about 13 fps, 16 GB |
+| Beauty | 1024x768, two steps | about 10 fps, 16 GB |
+| Hero | 1024x768, three steps (`OP_Refine2`, ControlNet 1.6) | about 3 fps, 18 GB; capture only |
+
+Each extra StreamDiff node on the same profile is one more diffusion step and shares the
+engine, so steps cost frame time, not VRAM. Every refine pass must raise its ControlNet scale
+(1.0 on the second step, 1.6 on the third) or the figure dissolves back into the scene. The
+node caps processing size at 1024 per side, so 1024x768 and 1024x576 are the largest
+profiles; a 1280x768 engine builds and verifies but cannot be loaded. All engines are FP16,
+the format the models ship in; precision is not the limit. Numbers and the switching recipe:
+`docs/eval/FIXTURE.md`.
+
+![Quality ladder](docs/images/quality_ladder_896_vs_1024.png)
+![Three steps](docs/images/three_step_cn_sweep.png)
+
 ## Demo recordings
 
 Two short recordings (a cloud-face illusion from the node output, and the Sentinel window
