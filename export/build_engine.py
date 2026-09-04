@@ -33,7 +33,7 @@ def shapes_for(width, height):
     }
 
 
-def build(onnx_path, out_path, width, height, opt_level, timing_cache, workspace_gb):
+def build(onnx_path, out_path, width, height, opt_level, timing_cache, workspace_gb, fp8=False):
     builder = trt.Builder(LOGGER)
     network = builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH))
     parser = trt.OnnxParser(network, LOGGER)
@@ -54,6 +54,10 @@ def build(onnx_path, out_path, width, height, opt_level, timing_cache, workspace
 
     config = builder.create_builder_config()
     config.set_flag(trt.BuilderFlag.FP16)
+    if fp8:
+        # Q/DQ graph from ModelOpt: let TensorRT use the explicit quantization, keep FP16 elsewhere
+        config.set_flag(trt.BuilderFlag.FP8)
+        print("FP8 build: explicit Q/DQ quantization enabled", flush=True)
     config.builder_optimization_level = opt_level
     config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, int(workspace_gb * (1 << 30)))
     # Match the shipped engines: no hardware-compat level, one static profile.
@@ -145,11 +149,12 @@ def main():
     ap.add_argument("--timing-cache", default="opticalpattern_timing.cache")
     ap.add_argument("--verify", action="store_true")
     ap.add_argument("--skip-build", action="store_true")
+    ap.add_argument("--fp8", action="store_true", help="build a ModelOpt Q/DQ graph with the FP8 flag")
     args = ap.parse_args()
     print("TensorRT", trt.__version__, flush=True)
     if not args.skip_build:
         build(args.onnx, args.out, args.width, args.height, args.opt_level, args.timing_cache,
-              args.workspace_gb)
+              args.workspace_gb, fp8=args.fp8)
     if args.verify:
         verify(args.out, args.onnx, args.width, args.height)
 
