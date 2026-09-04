@@ -4,7 +4,7 @@
     "vsyncEnabled": false
   },
   "graph": {
-    "canvasZoom": 1.5,
+    "canvasZoom": 1.2149999141693115,
     "links": [
       {
         "endPinId": 10,
@@ -42,9 +42,9 @@
         "startPinId": 22
       }
     ],
-    "nextLinkId": 16,
-    "nextNodeId": 7,
-    "nextPinId": 26,
+    "nextLinkId": 18,
+    "nextNodeId": 8,
+    "nextPinId": 32,
     "nodes": [
       {
         "displayName": "OP_Diffusion",
@@ -287,7 +287,7 @@
   "input": {
     "activeSource": ""
   },
-  "layout": "[Window][Terminal]\nPos=0,262\nSize=563,863\nCollapsed=0\nDockId=0x00000005,0\n\n[Window][Stats]\nPos=0,262\nSize=563,863\nCollapsed=0\nDockId=0x00000005,1\n\n[Window][Log]\nPos=0,262\nSize=563,863\nCollapsed=0\nDockId=0x00000005,2\n\n[Window][Properties]\nPos=1167,31\nSize=833,1094\nCollapsed=0\nDockId=0x00000002,0\n\n[Window][Graph]\nPos=565,262\nSize=600,863\nCollapsed=0\nDockId=0x00000006,0\n\n[Window][DockSpace]\nPos=0,31\nSize=2000,1094\nCollapsed=0\n\n[Window][Debug##Default]\nPos=60,60\nSize=400,400\nCollapsed=0\n\n[Window][module_0]\nPos=0,31\nSize=2088,1028\nCollapsed=0\nDockId=0x00000003,0\n\n[Window][OP_Diffusion]\nPos=0,31\nSize=1165,229\nCollapsed=0\nDockId=0x00000003,1\n\n[Window][OP_Pattern]\nPos=0,31\nSize=1165,229\nCollapsed=0\nDockId=0x00000003,0\n\n[Window][Project Engine Missing##missing_engine_modal]\nPos=1039,262\nSize=481,125\nCollapsed=0\n\n[Window][Recover Project]\nPos=560,360\nSize=880,404\nCollapsed=0\n\n[Window][Save Node Preset]\nPos=1070,473\nSize=420,565\nCollapsed=0\n\n[Window][OP_Refine]\nPos=0,31\nSize=1165,229\nCollapsed=0\nDockId=0x00000003,2\n\n[Window][OP_Upscale]\nPos=0,31\nSize=1165,229\nCollapsed=0\nDockId=0x00000003,3\n\n[Docking][Data]\nDockSpace       ID=0xCCBD8CF7 Window=0x3DA2F1DE Pos=0,31 Size=2000,1094 Split=X\n  DockNode      ID=0x00000001 Parent=0xCCBD8CF7 SizeRef=1725,1125 Split=Y\n    DockNode    ID=0x00000003 Parent=0x00000001 SizeRef=1528,615 CentralNode=1 Selected=0xDB3ECD28\n    DockNode    ID=0x00000004 Parent=0x00000001 SizeRef=1528,863 Split=X\n      DockNode  ID=0x00000005 Parent=0x00000004 SizeRef=834,450 Selected=0xD33228A6\n      DockNode  ID=0x00000006 Parent=0x00000004 SizeRef=889,450 Selected=0xF12F3499\n  DockNode      ID=0x00000002 Parent=0xCCBD8CF7 SizeRef=833,1125 Selected=0x8C72BEA8\n\n",
+  "layout": "[Window][Terminal]\nPos=0,648\nSize=834,863\nCollapsed=0\nDockId=0x00000005,0\n\n[Window][Stats]\nPos=0,648\nSize=834,863\nCollapsed=0\nDockId=0x00000005,1\n\n[Window][Log]\nPos=0,648\nSize=834,863\nCollapsed=0\nDockId=0x00000005,2\n\n[Window][Properties]\nPos=1727,31\nSize=833,1480\nCollapsed=0\nDockId=0x00000002,0\n\n[Window][Graph]\nPos=836,648\nSize=889,863\nCollapsed=0\nDockId=0x00000006,0\n\n[Window][DockSpace]\nPos=0,31\nSize=2560,1480\nCollapsed=0\n\n[Window][Debug##Default]\nPos=60,60\nSize=400,400\nCollapsed=0\n\n[Window][module_0]\nPos=0,31\nSize=2088,1028\nCollapsed=0\nDockId=0x00000003,0\n\n[Window][OP_Diffusion]\nPos=0,31\nSize=1725,615\nCollapsed=0\nDockId=0x00000003,1\n\n[Window][OP_Pattern]\nPos=0,31\nSize=1725,615\nCollapsed=0\nDockId=0x00000003,0\n\n[Window][Project Engine Missing##missing_engine_modal]\nPos=1039,262\nSize=481,125\nCollapsed=0\n\n[Window][Recover Project]\nPos=560,360\nSize=880,404\nCollapsed=0\n\n[Window][Save Node Preset]\nPos=1070,473\nSize=420,565\nCollapsed=0\n\n[Window][OP_Refine]\nPos=0,31\nSize=1725,615\nCollapsed=0\nDockId=0x00000003,2\n\n[Window][OP_Upscale]\nPos=0,31\nSize=1725,615\nCollapsed=0\nDockId=0x00000003,3\n\n[Window][OP_Refine2]\nPos=0,31\nSize=1725,615\nCollapsed=0\nDockId=0x00000003,4\n\n[Window][##LoadingOverlay]\nPos=867,525\nSize=265,75\nCollapsed=0\n\n[Docking][Data]\nDockSpace       ID=0xCCBD8CF7 Window=0x3DA2F1DE Pos=0,31 Size=2560,1480 Split=X\n  DockNode      ID=0x00000001 Parent=0xCCBD8CF7 SizeRef=1725,1125 Split=Y\n    DockNode    ID=0x00000003 Parent=0x00000001 SizeRef=1528,615 CentralNode=1 Selected=0x17930B97\n    DockNode    ID=0x00000004 Parent=0x00000001 SizeRef=1528,863 Split=X\n      DockNode  ID=0x00000005 Parent=0x00000004 SizeRef=834,450 Selected=0xD33228A6\n      DockNode  ID=0x00000006 Parent=0x00000004 SizeRef=889,450 Selected=0xF12F3499\n  DockNode      ID=0x00000002 Parent=0xCCBD8CF7 SizeRef=833,1125 Selected=0x8C72BEA8\n\n",
   "name": "opticalpattern_controlnet",
   "nodePresets": [
     {
@@ -581,6 +581,80 @@
       ],
       "pipelineType": "streamdiff",
       "scope": "project"
+    },
+    {
+      "created": "2026-09-03T19:05:47",
+      "id": "18a9a36a-3830-fa5b-6fdb61ae6aa5",
+      "modified": "2026-09-03T19:05:47",
+      "name": "Engine: OpticalPattern CN 1024x768 Beauty (relaunch after)",
+      "parameters": [
+        {
+          "name": "engine_tier",
+          "value": "1"
+        },
+        {
+          "name": "engine_profile",
+          "value": "sdxl/custom/opticalpattern/1024x768"
+        },
+        {
+          "name": "engine_precision",
+          "value": "1"
+        },
+        {
+          "name": "engine_resolution",
+          "value": "2"
+        },
+        {
+          "name": "processing_width",
+          "value": "1024"
+        },
+        {
+          "name": "processing_height",
+          "value": "768"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
+    },
+    {
+      "created": "2026-09-03T19:05:49",
+      "id": "029ffbf1-4c9d-8ded-bae28290566e",
+      "modified": "2026-09-03T19:05:49",
+      "name": "Canvas 1024x768",
+      "parameters": [
+        {
+          "name": "resolution_width",
+          "value": "1024"
+        },
+        {
+          "name": "resolution_height",
+          "value": "768"
+        }
+      ],
+      "pipelineType": "module:OP_Pattern",
+      "scope": "project"
+    },
+    {
+      "created": "2026-09-03T19:12:40",
+      "id": "0757fc31-e299-47da-2b5ad7d380dc",
+      "modified": "2026-09-03T19:12:40",
+      "name": "Refine2 Hero (dn0.45 cn1.6)",
+      "parameters": [
+        {
+          "name": "denoise",
+          "value": "0.45"
+        },
+        {
+          "name": "controlnet_scale",
+          "value": "1.6"
+        },
+        {
+          "name": "feedback",
+          "value": "0.000000"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
     }
   ],
   "osc": {
@@ -651,7 +725,7 @@
         "engine_precision": "1",
         "engine_profile": "sdxl/custom/opticalpattern/896x512",
         "engine_profile_type": "fixed",
-        "engine_resolution": "2",
+        "engine_resolution": "3",
         "engine_tier": "1",
         "erode": "0.000000",
         "feedback": "0.000000",
@@ -772,7 +846,7 @@
         "engine_precision": "1",
         "engine_profile": "sdxl/custom/opticalpattern/896x512",
         "engine_profile_type": "fixed",
-        "engine_resolution": "2",
+        "engine_resolution": "3",
         "engine_tier": "1",
         "erode": "0.000000",
         "feedback": "0.000000",
@@ -891,7 +965,7 @@
       "type": "vsr"
     }
   ],
-  "saved_at_ms": 1788481098564,
+  "saved_at_ms": 1788490159017,
   "sources": [
     {
       "captureFrameRate": 0,
