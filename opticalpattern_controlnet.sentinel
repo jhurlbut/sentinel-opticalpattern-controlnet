@@ -493,6 +493,94 @@
       ],
       "pipelineType": "streamdiff",
       "scope": "project"
+    },
+    {
+      "created": "2026-09-03T17:15:38",
+      "id": "a16bc69f-0572-a59b-92b0a3a2b315",
+      "modified": "2026-09-03T17:15:38",
+      "name": "Engine: Glitch LoRA (relaunch after)",
+      "parameters": [
+        {
+          "name": "engine_tier",
+          "value": "0"
+        },
+        {
+          "name": "engine_profile",
+          "value": "sdxl/custom/glitch/896x512"
+        },
+        {
+          "name": "engine_precision",
+          "value": "1"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
+    },
+    {
+      "created": "2026-09-03T17:16:14",
+      "id": "a9c90a50-72c1-0c3f-d1b5e27e3365",
+      "modified": "2026-09-03T17:16:14",
+      "name": "Engine: Infrared LoRA (relaunch after)",
+      "parameters": [
+        {
+          "name": "engine_tier",
+          "value": "0"
+        },
+        {
+          "name": "engine_profile",
+          "value": "sdxl/custom/infrared/896x512"
+        },
+        {
+          "name": "engine_precision",
+          "value": "1"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
+    },
+    {
+      "created": "2026-09-03T17:16:58",
+      "id": "5ff5cc98-2adf-999e-9b4c9fc860e3",
+      "modified": "2026-09-03T17:16:58",
+      "name": "Engine: X-ray LoRA (relaunch after)",
+      "parameters": [
+        {
+          "name": "engine_tier",
+          "value": "0"
+        },
+        {
+          "name": "engine_profile",
+          "value": "sdxl/custom/xray/896x512"
+        },
+        {
+          "name": "engine_precision",
+          "value": "1"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
+    },
+    {
+      "created": "2026-09-03T17:17:32",
+      "id": "e009e236-a996-1b30-657dddb060d6",
+      "modified": "2026-09-03T17:17:32",
+      "name": "Engine: OpticalPattern CN 896x512 (relaunch after)",
+      "parameters": [
+        {
+          "name": "engine_tier",
+          "value": "1"
+        },
+        {
+          "name": "engine_profile",
+          "value": "sdxl/custom/opticalpattern/896x512"
+        },
+        {
+          "name": "engine_precision",
+          "value": "1"
+        }
+      ],
+      "pipelineType": "streamdiff",
+      "scope": "project"
     }
   ],
   "osc": {
@@ -803,7 +891,7 @@
       "type": "vsr"
     }
   ],
-  "saved_at_ms": 1788480614531,
+  "saved_at_ms": 1788481098564,
   "sources": [
     {
       "captureFrameRate": 0,
